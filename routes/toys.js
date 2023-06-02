@@ -5,32 +5,6 @@ const router = express.Router()
 const { auth } = require("../middlewares/auth");
 const { ToyModel } = require("../models/toysModel");
 
-
-// Get list of toys with token
-// http://localhost:3000/toys
-// http://localhost:3000/toys/?perPage=4
-// http://localhost:3000/toys/?page=2&perPage=3
-// http://localhost:3000/toys/?page=2&perPage=3&sort=name
-router.get("/", auth, async (req, res) => {
-    let perPage = Math.min(req.query.perPage, 20) || 10;
-    let page = req.query.page || 1;
-    let sort = req.query.sort || "_id";
-    let reverse = req.query.reverse == "yes" ? -1 : 1;
-    let user = await UserModel.findOne({ _id: req.tokenData._id }, { password: 0 })
-    try {
-        let data = await ToyModel
-            .find({ user_id: user.id })
-            .limit(perPage)
-            .skip((page - 1) * perPage)
-            .sort({ [sort]: reverse })
-        res.json(data)
-
-    } catch (err) {
-        console.log(err)
-        res.status(500).json({ msg: "err", err })
-    }
-})
-
 // Get list of toys
 // http://localhost:3000/toys
 // http://localhost:3000/toys/?perPage=4
@@ -53,9 +27,35 @@ router.get("/", async (req, res) => {
     }
 })
 
+// Get list of toys with token
+// http://localhost:3000/toys
+// http://localhost:3000/toys/?perPage=4
+// http://localhost:3000/toys/?page=2&perPage=3
+// http://localhost:3000/toys/?page=2&perPage=3&sort=name
+// router.get("/", auth, async (req, res) => {
+//     let perPage = Math.min(req.query.perPage, 20) || 10;
+//     let page = req.query.page || 1;
+//     let sort = req.query.sort || "_id";
+//     let reverse = req.query.reverse == "yes" ? -1 : 1;
+//     let user = await UserModel.findOne({ _id: req.tokenData._id }, { password: 0 })
+//     try {
+//         let data = await ToyModel
+//             .find({ user_id: user.id })
+//             .limit(perPage)
+//             .skip((page - 1) * perPage)
+//             .sort({ [sort]: reverse })
+//         res.json(data)
+
+//     } catch (err) {
+//         console.log(err)
+//         res.status(500).json({ msg: "err", err })
+//     }
+// })
+
+
 // Search toy by name or info
 // http://localhost:3000/toys/search?s=w
-router.get("/search", auth, async (req, res) => {
+router.get("/search", async (req, res) => {
     let perPage = req.query.perPage || 10;
     let page = req.query.page || 1;
     try {
@@ -73,7 +73,7 @@ router.get("/search", auth, async (req, res) => {
 
 // Get by price
 // http://localhost:3000/toys/prices?min=100&max=300
-router.get("/prices", auth, async (req, res) => {
+router.get("/prices", async (req, res) => {
     let perPage = req.query.perPage || 10;
     let page = req.query.page || 1;
     let sort = req.query.sort || "price"
@@ -110,7 +110,7 @@ router.get("/prices", auth, async (req, res) => {
 
 // Get by category
 // http://localhost:3000/toys/category/Bike
-router.get("/category/:catName", auth, async (req, res) => {
+router.get("/category/:catName", async (req, res) => {
     let perPage = req.query.perPage || 10;
     let page = req.query.page || 1;
     try {
