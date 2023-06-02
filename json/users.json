@@ -1,0 +1,18 @@
+[
+  {
+    "fullName": {
+      "firstName": "Bina",
+      "lastName": "Stefansky"
+    },
+    "email": "binaro97@gmail.com",
+    "password": "123456"
+    },
+  {
+    "fullName": {
+      "firstName": "test4",
+      "lastName": "test"
+    },
+    "email": "test4@gmail.com",
+    "password": "123456"
+    }
+]
