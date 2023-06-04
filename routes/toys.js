@@ -27,6 +27,26 @@ router.get("/", async (req, res) => {
     }
 })
 
+// Get single toy by id 
+// http://localhost:3000/toys/single/6479a7752075eda9b6200b3c
+router.get("/single/:id", async (req, res) => {
+    let perPage = Math.min(req.query.perPage, 20) || 10;
+    let page = req.query.page || 1;
+    try {
+        let toyId = req.params.id
+        let data = await ToyModel
+            .findOne({_id: toyId})
+            .limit(perPage)
+            .skip((page - 1) * perPage)
+            .sort({ _id: -1 })
+        res.json(data)
+
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ msg: "There error try again later", err })
+    }
+})
+
 // Get list of toys with token
 // http://localhost:3000/toys
 // http://localhost:3000/toys/?perPage=4
