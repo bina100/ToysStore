@@ -36,6 +36,7 @@ exports.validateSignIn = (_bodyValid) => {
         },
         email: Joi.string().min(2).max(100).email().required(),
         password: Joi.string().min(6).max(50).required(),
+        role: Joi.string().min(2).max(50).allow("" , null),
     })
     return joiSchema.validate(_bodyValid)
 }
