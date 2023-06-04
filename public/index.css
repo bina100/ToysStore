@@ -2,13 +2,22 @@ main{
     background-color: whitesmoke;
   }
   main .topPic {
-    min-height: 300px;
-    border-radius: 32px;
+    opacity: 0.5;
     background-image: url(toys-img.jpg);
-    font-family: "Pattaya", sans-serif;
-    box-shadow: 0px 10px 22px 0px #000000;
+    /* box-shadow: 0px 10px 22px 0px #000000; */
     background-position: center;
     background-size: cover;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0px;
+    min-height: 140px;
+  }
+  main .topPic h2{
+    font-weight: 600;
+    opacity: 1;
+    color: black;
   }
   
     .bigDomain{
@@ -23,14 +32,29 @@ main{
     font-family: sans-serif;
     margin: 8px;
     text-decoration: none;
-    color: black;
+    color: yellow;
     transition: 1000ms;
   }
   
   nav .myScale:hover{
     transform: scale(1.2);
     letter-spacing: 2px;
-    color: black;
+    color: olive;
+  }
+
+  nav .users{
+    color: blue;
+  }
+
+  nav .users:hover{
+    color: orangered;
+  }
+  nav .toys{
+    color: green;
+  }
+
+  nav .toys:hover{
+    color: red;
   }
   
   .text1{
